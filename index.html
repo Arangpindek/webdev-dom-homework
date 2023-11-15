@@ -49,7 +49,7 @@
       <input type="text" class="add-form-name" placeholder="Введите ваше имя" />
       <textarea type="textarea" class="add-form-text" placeholder="Введите ваш коментарий" rows="4"></textarea>
       <div class="add-form-row">
-        <button class="add-form-button" onclick="addComment()">Написать</button>
+        <button id="addCom" class="add-form-button">Написать</button>
       </div>
     </div>
   </div>
@@ -57,12 +57,16 @@
 
 <script>
   "use strict";
-  function addComment() {
+  const addCom = document.querySelector(".add-form-button");
+  addCom.onclick = function () {
     const nameInput = document.querySelector(".add-form-name");
     const textInput = document.querySelector(".add-form-text");
-    const commentsList = document.querySelector(".comments");
-    const currentDate = new Date().toLocaleString();
-    const newComment = `
+    if (nameInput.value === "" || textInput.value === "") {
+      alert("Проверьте правильность введения")
+    } else {
+      const commentsList = document.querySelector(".comments");
+      const currentDate = new Date().toLocaleString();
+      const newComment = `
       <li class="comment">
           <div class="comment-header">
             <div>${nameInput.value}</div>
@@ -81,10 +85,11 @@
           </div>
         </li>
       `
-    commentsList.innerHTML += newComment;
-    nameInput.value = "";
-    textInput.value = "";
-  }
+      commentsList.innerHTML += newComment;
+      nameInput.value = "";
+      textInput.value = "";
+    }
+  };
   console.log("It works!");
 </script>
 
